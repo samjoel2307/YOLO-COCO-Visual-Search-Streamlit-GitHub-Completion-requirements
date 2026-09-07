@@ -1,4 +1,3 @@
-
 # 🔎 YOLO COCO Visual Search using Streamlit
 
 A local computer-vision project that combines **YOLOv8 object detection**, **COCO classes**, and **deep-feature visual search** in an interactive **Streamlit** application.
@@ -235,6 +234,8 @@ VS Code
 → conda activate yolo_visual
 ```
 
+![Conda environment activation](Screenshots/01_conda_environment.png)
+
 ---
 
 ## 8.2 Streamlit Running in Terminal
@@ -245,7 +246,7 @@ Required evidence:
 streamlit run app.py
 ```
 
-
+![Streamlit terminal](Screenshots/02_streamlit_terminal.png)
 
 ---
 
@@ -255,8 +256,7 @@ Capture the running application in your browser.
 
 The screenshot should clearly show the project title and Streamlit interface.
 
-
-
+![Streamlit web UI](Screenshots/03_streamlit_ui.png)
 
 ---
 
@@ -271,6 +271,7 @@ The screenshot should show:
 - Object labels
 - Confidence scores
 
+![YOLO object detection result](Screenshots/04_object_detection.png)
 
 ---
 
@@ -285,6 +286,7 @@ The screenshot should show:
 - Ranked results
 - Similarity scores
 
+![Visual search result](Screenshots/05_visual_search.png)
 
 ---
 
