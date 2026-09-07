@@ -1,71 +1,109 @@
-# YOLO COCO Visual Search + Streamlit
+# 🔎 YOLO COCO Visual Search using Streamlit
+
+A local computer-vision project that combines **YOLOv8 object detection**, **COCO classes**, and **deep-feature visual search** in an interactive **Streamlit** application.
+
+> **Submission note:** This project is intended to be executed locally in **VS Code with a Conda environment**, according to the assignment requirements. The screenshots in `Screenshots/` are clearly marked placeholders until you replace them with screenshots from your own computer.
+
+---
 
 ## 1. Project Title
 
-**YOLO COCO Visual Search using Streamlit**
+### YOLO COCO Visual Search + Streamlit
+
+---
 
 ## 2. Abstract / Introduction
 
-This project is a local computer-vision application that combines YOLO object detection with COCO class labels and visual image search in a Streamlit interface.
+This project demonstrates an end-to-end computer-vision application using a pretrained YOLO model and a Streamlit web interface.
 
-The application accepts an input image and detects common objects using a pretrained YOLO model trained on the COCO dataset. It displays bounding boxes, object names, and confidence scores.
+The first part of the application performs object detection. A user uploads an image, YOLOv8 detects objects, and the application displays bounding boxes, COCO class names, and confidence scores.
 
-A second module provides visual search. Users can upload a query image and a temporary gallery of images. Deep image features are extracted with a pretrained ResNet-50 model and cosine similarity is used to rank the gallery images by visual similarity.
+The second part implements visual search. A user provides a query image and a temporary gallery of images. The application extracts deep visual features using a pretrained ResNet-50 network and compares the query with gallery images using cosine similarity. The gallery is then ranked from most visually similar to least similar.
 
-The project is designed to be executed locally in **VS Code using a Conda environment**, as required for submission.
+The application is designed for local execution and can be demonstrated directly from a VS Code terminal using:
+
+```bash
+streamlit run app.py
+```
+
+---
 
 ## 3. Dataset & YOLO Model Details (COCO)
 
-### COCO
+### COCO Dataset
 
-COCO (Common Objects in Context) is a widely used computer-vision dataset containing images and annotations for object detection, segmentation, and related tasks.
+The **Common Objects in Context (COCO)** dataset is a widely used benchmark for computer vision. Its object-detection annotations contain 80 common object categories.
 
-The pretrained YOLO model used in this project recognizes the standard COCO object categories, including examples such as:
+Examples of COCO categories include:
 
 - person
-- car
 - bicycle
+- car
+- motorcycle
 - bus
+- train
+- truck
+- boat
+- traffic light
 - dog
 - cat
+- horse
 - chair
-- bottle
+- couch
 - laptop
 - cell phone
+- bottle
 
-The exact detections depend on the input image and the confidence threshold.
+The pretrained YOLO model used by this application uses COCO-trained weights.
 
-### YOLO model
+### YOLO Model
 
-This project uses **YOLOv8n (`yolov8n.pt`)**, a lightweight YOLO model suitable for local experimentation and CPU systems.
+This project uses:
 
-The model file is downloaded automatically by Ultralytics on the first execution, so the large model weight file does not need to be committed to GitHub.
+**YOLOv8n (`yolov8n.pt`)**
+
+The `n` version is a lightweight model selected because it is practical for local execution, including CPU-based laptops.
+
+The model is automatically downloaded by Ultralytics the first time the application runs. The model weight file should **not** be committed to the GitHub repository.
+
+---
 
 ## 4. Environment Setup
 
-### Prerequisites
+### Recommended software
 
-Install the following on Windows:
+- Windows 10/11
+- Visual Studio Code
+- Miniconda or Anaconda
+- Python 3.11
+- Git
+- A modern web browser
 
-1. Anaconda or Miniconda
-2. Visual Studio Code
-3. Python support in VS Code
-4. Git
+### Create the Conda environment
 
-Open **Anaconda Prompt** or a VS Code terminal configured for Conda.
-
-Create the project environment:
+Open Anaconda Prompt or the VS Code terminal:
 
 ```bash
 conda create -n yolo_visual python=3.11 -y
+```
+
+Activate it:
+
+```bash
 conda activate yolo_visual
 ```
 
-Then open the project folder in VS Code and select the `yolo_visual` Python interpreter.
+Verify Python:
+
+```bash
+python --version
+```
+
+---
 
 ## 5. CPU Installation Steps
 
-For a typical Acer TravelMate with Intel integrated graphics, CPU execution is appropriate.
+For computers without a supported NVIDIA GPU, CPU execution can be used.
 
 Activate the environment:
 
@@ -73,171 +111,260 @@ Activate the environment:
 conda activate yolo_visual
 ```
 
-Install PyTorch CPU packages:
+Install the CPU version of PyTorch and TorchVision:
 
 ```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 
-Install the remaining packages:
+Then install the remaining project dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> If your course provides a specific installation command, use the course command instead.
-
-### GPU Installation Steps
-
-If the computer has a supported NVIDIA GPU, use the PyTorch installation command recommended for the installed CUDA version from the official PyTorch instructions, then run:
-
-```bash
-pip install -r requirements.txt
-```
-
-Do not install CUDA packages blindly. The correct PyTorch/CUDA combination depends on the GPU, driver, and current PyTorch release.
-
-## 6. How to Run in VS Code using Conda
-
-Open the project folder in VS Code.
-
-Open **Terminal → New Terminal**.
-
-Activate Conda:
-
-```bash
-conda activate yolo_visual
-```
-
-Confirm Python:
-
-```bash
-python --version
-```
-
-Confirm the environment:
-
-```bash
-where python
-```
-
-The path should point to the `yolo_visual` Conda environment.
-
-Run a basic import check:
+Verify the installation:
 
 ```bash
 python -c "import torch, torchvision, ultralytics, streamlit; print('Environment OK')"
 ```
 
-## 7. How to Deploy using Streamlit
+### GPU Installation
 
-From the project root, run:
+If the computer has a supported NVIDIA GPU, install the PyTorch build recommended for the installed NVIDIA driver/CUDA configuration, then install:
+
+```bash
+pip install -r requirements.txt
+```
+
+The exact GPU command should be selected from the current PyTorch installation instructions rather than assuming a CUDA version.
+
+---
+
+## 6. How to Run in VS Code using Conda
+
+### Step 1 — Open the project
+
+Open this folder in VS Code:
+
+```text
+yolo-coco-visual-search
+```
+
+### Step 2 — Select the Python interpreter
+
+In VS Code:
+
+```text
+Ctrl + Shift + P
+→ Python: Select Interpreter
+→ yolo_visual
+```
+
+### Step 3 — Activate Conda
+
+In the VS Code terminal:
+
+```bash
+conda activate yolo_visual
+```
+
+### Step 4 — Verify the environment
+
+```bash
+where python
+```
+
+The returned path should point to the `yolo_visual` Conda environment.
+
+### Step 5 — Run the application
+
+From the project root:
 
 ```bash
 streamlit run app.py
 ```
 
-Streamlit will display a local URL in the terminal. Open that address in your browser.
+---
 
-The application has two tabs:
+## 7. How to Deploy using Streamlit
+
+The required command is:
+
+```bash
+streamlit run app.py
+```
+
+After starting the application, Streamlit provides a local browser address.
+
+The application contains two main sections.
 
 ### Object Detection
 
-1. Upload an image.
-2. YOLO analyzes the image.
-3. Bounding boxes are displayed.
-4. COCO object names and confidence scores are shown.
+1. Open the **Object Detection** tab.
+2. Upload a JPG, JPEG, or PNG image.
+3. YOLO analyzes the image.
+4. The original image is shown.
+5. The detected image is shown with bounding boxes.
+6. Detected COCO objects and confidence scores are displayed.
 
 ### Visual Search
 
-1. Upload a query image.
-2. Upload several gallery images.
-3. The application extracts deep image features.
-4. Images are ranked using cosine similarity.
-5. The top matching images are displayed with similarity scores.
+1. Open the **Visual Search** tab.
+2. Upload one query image.
+3. Upload several gallery images.
+4. The application extracts deep image features.
+5. Cosine similarity is calculated.
+6. The gallery is ranked by similarity.
+7. The top results are displayed.
 
-## 8. Output Screenshots
+---
 
-The `Screenshots` folder is compulsory for the assignment.
+# 8. Output Screenshots
 
-Add **your own screenshots** after running the application locally.
+**Important:** The screenshots must be captured by the learner from their own VS Code terminal and browser. The placeholder images currently included in this repository are only there to show the required filenames/layout. **Replace them before submitting the repository.**
 
-Required screenshots:
+## 8.1 Conda Environment Activation
 
-| File | What it should show |
-|---|---|
-| `01_conda_environment.png` | Conda environment activated in VS Code terminal |
-| `02_streamlit_terminal.png` | `streamlit run app.py` running in the terminal |
-| `03_streamlit_ui.png` | Streamlit application in the browser |
-| `04_object_detection.png` | YOLO detection result with bounding boxes and labels |
-
-Recommended additional screenshot:
-
-| File | What it should show |
-|---|---|
-| `05_visual_search.png` | Visual-search query and ranked gallery results |
-
-**Do not use screenshots downloaded from the internet or copied from another learner.**
-
-Place your screenshots in:
+Required evidence:
 
 ```text
-Screenshots/
+VS Code
+→ Terminal
+→ conda activate yolo_visual
 ```
+
+![Conda environment activation](Screenshots/01_conda_environment.png)
+
+---
+
+## 8.2 Streamlit Running in Terminal
+
+Required evidence:
+
+```bash
+streamlit run app.py
+```
+
+![Streamlit terminal](Screenshots/02_streamlit_terminal.png)
+
+---
+
+## 8.3 Streamlit Web UI
+
+Capture the running application in your browser.
+
+The screenshot should clearly show the project title and Streamlit interface.
+
+![Streamlit web UI](Screenshots/03_streamlit_ui.png)
+
+---
+
+## 8.4 YOLO Object Detection Result
+
+Upload an image containing recognizable objects and capture the detection result.
+
+The screenshot should show:
+
+- Input image
+- Bounding boxes
+- Object labels
+- Confidence scores
+
+![YOLO object detection result](Screenshots/04_object_detection.png)
+
+---
+
+## 8.5 Visual Search Result
+
+This additional screenshot demonstrates the visual-search enhancement.
+
+The screenshot should show:
+
+- Query image
+- Gallery images
+- Ranked results
+- Similarity scores
+
+![Visual search result](Screenshots/05_visual_search.png)
+
+---
 
 ## 9. Enhancements / Innovations Added
 
-The basic YOLO detector has been extended with a visual-search component.
+### 9.1 Interactive Streamlit interface
 
-### Enhancement 1 — Interactive Streamlit UI
+Instead of running detection only from a Python command, users can interact with the application through a browser.
 
-The project provides a browser-based interface instead of requiring users to interact with a Python script directly.
+### 9.2 Adjustable confidence threshold
 
-### Enhancement 2 — Adjustable confidence threshold
+A sidebar slider allows users to change the YOLO detection confidence threshold.
 
-Users can change the YOLO confidence threshold from the sidebar.
+### 9.3 COCO detection summary
 
-### Enhancement 3 — COCO object summary
+Detected objects are presented with class names and confidence values.
 
-Detected objects are presented with their COCO class names and confidence values.
+### 9.4 Visual similarity search
 
-### Enhancement 4 — Visual similarity search
+The project extends object detection with an image-search feature using deep visual features from ResNet-50.
 
-A query image can be compared against a user-provided image gallery using deep features extracted from ResNet-50.
+### 9.5 Top-K results
 
-### Enhancement 5 — Top-K search
+Users can select the number of visually similar gallery images to display.
 
-Users can choose how many visually similar results should be displayed.
+### 9.6 Temporary user-provided gallery
 
-## 10. Results & Conclusion
+The application does not require a large dataset to be committed to GitHub. Users can upload gallery images directly through Streamlit.
 
-The application successfully combines object detection and visual search in one Streamlit application.
+---
 
-YOLO provides real-time-style object detection and identifies objects using COCO categories. The visual-search module provides a complementary way to compare images based on learned visual features.
+# 10. Results & Conclusion
 
-The project demonstrates an end-to-end computer-vision workflow:
+The completed application demonstrates two related computer-vision tasks in a single interface.
+
+### Object detection result
+
+YOLOv8 successfully identifies objects from uploaded images using COCO-trained classes and displays the detections with bounding boxes and confidence scores.
+
+### Visual search result
+
+The visual-search module uses deep image features and cosine similarity to rank uploaded gallery images according to their visual similarity to a query image.
+
+### Conclusion
+
+The project provides a practical demonstration of:
 
 ```text
-Input Image
-    ↓
-YOLO Object Detection
-    ↓
-COCO Class + Confidence
-    ↓
-Streamlit Visualization
-
-Query Image + Gallery
-    ↓
-ResNet-50 Feature Extraction
-    ↓
-Cosine Similarity
-    ↓
-Ranked Visual Search Results
+Image Input
+     ↓
+YOLOv8 Detection
+     ↓
+COCO Object Classes
+     ↓
+Bounding Boxes + Confidence
+     ↓
+Streamlit UI
 ```
 
-The project can be extended in future work with a persistent FAISS index, a larger image database, CLIP embeddings, database storage, user authentication, and cloud deployment.
+and:
 
-## Project Structure
+```text
+Query Image + Gallery
+          ↓
+Deep Feature Extraction
+          ↓
+Cosine Similarity
+          ↓
+Ranking
+          ↓
+Top-K Visual Search Results
+```
+
+The project can be extended in future work by using CLIP embeddings, FAISS indexing, a persistent image database, larger galleries, object-specific search, and cloud deployment.
+
+---
+
+# Project Structure
 
 ```text
 yolo-coco-visual-search/
@@ -253,6 +380,7 @@ yolo-coco-visual-search/
 │
 ├── data/
 │   └── gallery/
+│       └── .gitkeep
 │
 └── Screenshots/
     ├── 01_conda_environment.png
@@ -262,24 +390,40 @@ yolo-coco-visual-search/
     └── 05_visual_search.png
 ```
 
-## GitHub Submission Checklist
+---
 
-Before submitting:
+# GitHub Upload Checklist
 
-- [ ] Repository is **public**
-- [ ] `app.py` is present
-- [ ] `requirements.txt` is present
-- [ ] Supporting folders/files are present
-- [ ] `README.md` is complete
-- [ ] `Screenshots/` exists
-- [ ] Own Conda screenshot is included
-- [ ] Own Streamlit terminal screenshot is included
-- [ ] Own Streamlit UI screenshot is included
-- [ ] Own YOLO detection screenshot is included
-- [ ] Application was actually tested locally
-- [ ] `streamlit run app.py` works
-- [ ] Final LMS submission contains **only the public GitHub repository link**
+Before submitting to the LMS:
 
-## Academic Integrity
+- [ ] Repository is **PUBLIC**
+- [ ] `app.py` uploaded
+- [ ] `requirements.txt` uploaded
+- [ ] `README.md` uploaded
+- [ ] `src/` uploaded
+- [ ] `data/` uploaded
+- [ ] `Screenshots/` uploaded
+- [ ] Conda activation screenshot replaced
+- [ ] Streamlit terminal screenshot replaced
+- [ ] Streamlit UI screenshot replaced
+- [ ] Object detection screenshot replaced
+- [ ] Visual-search screenshot replaced
+- [ ] Application tested locally
+- [ ] `streamlit run app.py` tested successfully
+- [ ] README screenshots display correctly on GitHub
+- [ ] Repository visibility verified as **Public**
+- [ ] Only the GitHub repository link is submitted to LMS
 
-This repository should be customized and tested by the learner. Screenshots must come from the learner's own computer and execution. Add your own observations, improvements, screenshots, and project details before submission.
+---
+
+# Academic Integrity
+
+This project should be executed and tested by the learner. The screenshots included in the final submission must be the learner's own screenshots.
+
+Customize the README with your own observations, screenshots, results, and any additional features you actually implemented. Do not copy another learner's repository or documentation.
+
+---
+
+# License
+
+This project is intended for educational and academic demonstration purposes.
