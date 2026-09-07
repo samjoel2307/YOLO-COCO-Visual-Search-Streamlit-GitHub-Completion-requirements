@@ -1,4 +1,4 @@
-<img width="1280" height="720" alt="01_conda_environment" src="https://github.com/user-attachments/assets/02ae1084-bf01-4901-8091-6e68c7f340ef" />
+
 # 🔎 YOLO COCO Visual Search using Streamlit
 
 A local computer-vision project that combines **YOLOv8 object detection**, **COCO classes**, and **deep-feature visual search** in an interactive **Streamlit** application.
