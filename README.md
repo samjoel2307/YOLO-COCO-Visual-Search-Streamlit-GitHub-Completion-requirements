@@ -1,3 +1,4 @@
+<img width="1280" height="720" alt="01_conda_environment" src="https://github.com/user-attachments/assets/02ae1084-bf01-4901-8091-6e68c7f340ef" />
 # 🔎 YOLO COCO Visual Search using Streamlit
 
 A local computer-vision project that combines **YOLOv8 object detection**, **COCO classes**, and **deep-feature visual search** in an interactive **Streamlit** application.
@@ -234,7 +235,8 @@ VS Code
 → conda activate yolo_visual
 ```
 
-![Conda environment activation](Screenshots/01_conda_environment.png)
+<img width="1280" height="720" alt="01_conda_environment" src="https://github.com/user-attachments/assets/a401d529-133d-4f73-9c39-7ee7e7d5b173" />
+
 
 ---
 
@@ -245,8 +247,8 @@ Required evidence:
 ```bash
 streamlit run app.py
 ```
+<img width="1280" height="720" alt="02_streamlit_terminal" src="https://github.com/user-attachments/assets/8fd63c5c-e522-4eb2-97e3-15842a2439ad" />
 
-![Streamlit terminal](Screenshots/02_streamlit_terminal.png)
 
 ---
 
@@ -256,7 +258,8 @@ Capture the running application in your browser.
 
 The screenshot should clearly show the project title and Streamlit interface.
 
-![Streamlit web UI](Screenshots/03_streamlit_ui.png)
+<img width="1280" height="720" alt="03_streamlit_ui" src="https://github.com/user-attachments/assets/04e71dbe-a748-4e08-903c-f45779737255" />
+
 
 ---
 
@@ -271,7 +274,7 @@ The screenshot should show:
 - Object labels
 - Confidence scores
 
-![YOLO object detection result](Screenshots/04_object_detection.png)
+<img width="1280" height="720" alt="04_object_detection" src="https://github.com/user-attachments/assets/cf6a5c52-4505-4abf-8eca-ce1e652cfd64" />
 
 ---
 
@@ -285,8 +288,8 @@ The screenshot should show:
 - Gallery images
 - Ranked results
 - Similarity scores
+<img width="1280" height="720" alt="05_visual_search" src="https://github.com/user-attachments/assets/5d65aa35-8080-46b6-84f8-e6d88d02028b" />
 
-![Visual search result](Screenshots/05_visual_search.png)
 
 ---
 
